@@ -10,11 +10,13 @@ import { BankAccountEditComponent } from './bank-account/bank-account-edit/bank-
 import { BankAccountListComponent } from './bank-account/bank-account-list/bank-account-list.component';
 import { BankAccountService } from './services/bank-account.service';
 import { CustomerService } from './services/customer.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     NgxDatatableModule,
+    ReactiveFormsModule,
     adminRoutes
   ],
   declarations: [DashBoardComponent, CustomerListComponent, CustomerEditComponent, BankAccountEditComponent, BankAccountListComponent],
