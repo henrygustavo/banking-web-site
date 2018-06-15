@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { MenuService } from '../../../shared/services/menu.service';
 import { BankAccountService } from '../../services/bank-account.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-bank-account-list',
@@ -9,21 +10,29 @@ import { BankAccountService } from '../../services/bank-account.service';
 })
 export class BankAccountListComponent implements OnInit {
 
-  rows = [
-    { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-    { name: 'Dany', gender: 'Male', company: 'KFC' },
-    { name: 'Molly', gender: 'Female', company: 'Burger King' },
-  ];
-  columns = [
-    { prop: 'name' },
-    { name: 'Gender' },
-    { name: 'Company' }
-  ];
-  
+  @BlockUI() blockUI: NgBlockUI;
+  @ViewChild('editTmplRow') editTmplRow: TemplateRef<any>;
+  rows = new Array<any>();
+  columns: Array<any> = [];
+
   constructor(private _menuService: MenuService, private _bankAccountService: BankAccountService) { }
 
   ngOnInit() {
     this._menuService.selectMenuItem('bank-accounts');
+
+    this. columns = [
+      { prop: 'id' , name: 'id' },
+      { prop: 'number' , name: 'Number' },
+      { prop: 'customerName' , name: 'Customer Name'  },
+      { prop: 'isLocked' , name: 'Locked'  },
+      { prop: 'balance' , name: 'Balance'  },
+      { prop: '', name: '', cellTemplate: this.editTmplRow}];
+  
+    this. rows = [
+                { id: '1', number: '001104860195023275', customerName: ' Henry Fuentes' , isLocked: 'false', balance: '100'},
+                { id: '2', number: '001104860195023276', customerName: ' Boris Vera' , isLocked: 'false', balance: '200'},
+                { id: '3', number: '001104860195023277', customerName: ' Frank Jonislla' , isLocked: 'false', balance: '300'},
+                { id: '4', number: '001104860195023278', customerName: ' Felipe Llancachagua' , isLocked: 'false', balance: '400'}];
   }
 
 }

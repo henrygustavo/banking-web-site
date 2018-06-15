@@ -36,26 +36,26 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
               private _router: Router,
               private fb: FormBuilder) {}
 
-  ngOnInit() {
-    this._menuService.selectMenuItem('customers');
+    ngOnInit() {
+      this._menuService.selectMenuItem('customers');
 
-    this.setUpValidationMessages();
+      this.setUpValidationMessages();
 
-    this.setUpFormControls();
+      this.setUpFormControls();
+    }
+
+    ngAfterViewInit(): void {
+
+      let controlBlurs: Observable<any>[] = this.formInputElements
+          .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
+
+      let controlSubscription = Observable.merge(this.mainForm.valueChanges, ...controlBlurs).debounceTime(800).subscribe(() => {
+          this.displayMessage = this.genericValidator.processMessages(this.mainForm);
+      });
+
+      this.subscription.add(controlSubscription);
+
   }
-
-  ngAfterViewInit(): void {
-
-    let controlBlurs: Observable<any>[] = this.formInputElements
-        .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
-
-    let controlSubscription = Observable.merge(this.mainForm.valueChanges, ...controlBlurs).debounceTime(800).subscribe(() => {
-        this.displayMessage = this.genericValidator.processMessages(this.mainForm);
-    });
-
-    this.subscription.add(controlSubscription);
-
-}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -103,22 +103,21 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
         let model = Object.assign({}, this.customer, this.mainForm.value);
 
         this.blockUI.start();
-        let roleSaveSubscription =  this._customerService.save(model, Number(model.id)).subscribe(
-            () => {
+ /*        let saveSubscription =  this._customerService.save(model, Number(model.id)).subscribe(
+            () => { */
                 // Reset the form to clear the flags
                     this._messageAlertHandleService.handleSuccess('Saved successfully');
                     this.mainForm.reset();
                     this.blockUI.stop();
                     this._router.navigate(['/customers']);
-            },
+         /*    },
             error => {
                 this._messageAlertHandleService.handleError(error);
                 this.blockUI.stop();
             }
-         );
+         ); 
 
-        this.subscription.add(roleSaveSubscription);
+        this.subscription.add(saveSubscription);*/
     }
-}
-
+  }
 }
