@@ -32,9 +32,9 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private _menuService : MenuService,
               private _customerService : CustomerService,
               private _messageAlertHandleService: MessageAlertHandleService,
-                private _route: ActivatedRoute,
+              private _route: ActivatedRoute,
               private _router: Router,
-              private fb: FormBuilder) {}
+              private formBuilder: FormBuilder) {}
 
     ngOnInit() {
       this._menuService.selectMenuItem('customers');
@@ -55,28 +55,28 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.subscription.add(controlSubscription);
 
-  }
+    }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+    ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+    }
 
-  setUpValidationMessages() : void {
+    setUpValidationMessages() : void {
 
-    this.validationMessages = {
+      this.validationMessages = {
 
-      firstName: {
-        required: 'Fist Name is required.',
-        minlength: 'Fist Name must be at least 2 characters.'
-      },
-      lastName: {
-        required: 'Last Name is required.',
-        minlength: 'Last Name must be at least 2 characters.'
-      }
-    };
+        firstName: {
+          required: 'Fist Name is required.',
+          minlength: 'Fist Name must be at least 2 characters.'
+        },
+        lastName: {
+          required: 'Last Name is required.',
+          minlength: 'Last Name must be at least 2 characters.'
+        }
+      };
 
-    this.genericValidator = new GenericValidator(this.validationMessages);
-  }
+      this.genericValidator = new GenericValidator(this.validationMessages);
+    }
 
   setUpFormControls(): void {
 
@@ -86,7 +86,7 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
             const id: number = Number(params['id']);
 
-            this.mainForm = this.fb.group({
+            this.mainForm = this.formBuilder.group({
                 id: id,
                 firstName: new FormControl( '' ,[Validators.required, Validators.minLength(2)]),
                 lastName: new FormControl( '' ,[Validators.required, Validators.minLength(2)])
