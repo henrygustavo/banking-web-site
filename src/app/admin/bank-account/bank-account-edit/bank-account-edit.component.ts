@@ -10,6 +10,7 @@ import { BankAccount } from '../../models/bank-account';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageAlertHandleService } from '../../../shared/services/message-alert.service';
+import {CustomValidators} from 'ng2-validation';
 
 @Component({
   selector: 'app-bank-account-edit',
@@ -70,7 +71,8 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
                       required: 'Customer Name is required.'},
       number: {
                       required: 'Bank Account Number is required.',
-                      minlength: 'Bank Account Number must be at least 18 numbers.'
+                      digits: 'Please enter a valid number.',
+                      rangeLength: 'Bank Account Number must have 18 numbers.'
       }
     };
 
@@ -88,7 +90,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
             this.mainForm = this.formBuilder.group({
                 id: id,
                 customerName: new FormControl( '' ,[Validators.required]),
-                number: new FormControl( '' ,[Validators.required, Validators.minLength(18)]),
+                number: new FormControl( '' ,[Validators.required, CustomValidators.digits, CustomValidators.rangeLength([18, 18])]),
                 isLocked: new FormControl('')
             });
         });

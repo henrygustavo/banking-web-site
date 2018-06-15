@@ -10,7 +10,7 @@
     <div class="col-md-4 well col-lg-offset-4">
       <div class="form-group">
         <div class="input-group">
-          <input type="text" name="dni" placeholder="DNI Customer" class="form-control" />
+          <input type="text" name="dni" placeholder="DNI Customer" class="form-control"  maxlength="8"/>
           <span class="input-group-btn">
             <button type="submit" class="btn  btn-default btn-block">Search</button>
           </span>
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
           <div [ngClass]="{'has-error': displayMessage.number }">
-            <input class="form-control" placeholder="Account Number" formControlName="number" />
+            <input class="form-control" placeholder="Account Number" formControlName="number" maxlength="18" />
             <span class="help-block" *ngIf="displayMessage.number">
               {{displayMessage.number}}
             </span>
