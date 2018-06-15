@@ -13,7 +13,8 @@ export class MenuService {
 
         return [
 
-            new MenuItem('fa-home', 'dashboard', 'dashboard', 'DashBoard')
+            new MenuItem('fa-home', 'dashboard', 'dashboard', 'DashBoard'),
+            new MenuItem('fa-edit', 'clients', 'clients', 'Clients')
         ];
     }
 

@@ -4,3 +4,6 @@
 @import "assets/css/app-admin.css";
 @import "assets/css/theme.css";
 @import "assets/css/metis-menu.css";
+
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
