@@ -12,8 +12,8 @@ import { BankAccountService } from './services/bank-account.service';
 import { CustomerService } from './services/customer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BankAccountSearchComponent } from './bank-account/bank-account-search/bank-account-search.component';
-import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
-import { TransactionCreateComponent } from './transaction/transaction-create/transaction-create.component';
+import { TransferListComponent } from './transfer/transfer-list/transfer-list.component';
+import { TransferCreateComponent } from './transfer/transfer-create/transfer-create.component';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { TransactionCreateComponent } from './transaction/transaction-create/tra
   ],
   declarations: [DashBoardComponent, CustomerListComponent,
                 CustomerEditComponent, BankAccountEditComponent,
-                BankAccountListComponent, BankAccountSearchComponent, TransactionListComponent, TransactionCreateComponent],
+                BankAccountListComponent, BankAccountSearchComponent, TransferListComponent, TransferCreateComponent],
   providers: [AdminGuard, BankAccountService, CustomerService]
 
 })

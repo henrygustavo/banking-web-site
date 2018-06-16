@@ -6,8 +6,8 @@ import { CustomerEditComponent } from './customer/customer-edit/customer-edit.co
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 import { BankAccountListComponent } from './bank-account/bank-account-list/bank-account-list.component';
 import { BankAccountEditComponent } from './bank-account/bank-account-edit/bank-account-edit.component';
-import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
-import { TransactionCreateComponent } from './transaction/transaction-create/transaction-create.component';
+import { TransferListComponent } from './transfer/transfer-list/transfer-list.component';
+import { TransferCreateComponent } from './transfer/transfer-create/transfer-create.component';
 
 const routes: Route[] = [
     {
@@ -36,13 +36,13 @@ const routes: Route[] = [
         canActivate: [AdminGuard]
     },
     {
-        path: 'transactions',
-        component: TransactionListComponent,
+        path: 'transfers',
+        component: TransferListComponent,
         canActivate: [AdminGuard]
     },
     {
-        path: 'transactions/create/:id',
-        component: TransactionCreateComponent,
+        path: 'transfers/create/:id',
+        component: TransferCreateComponent,
         canActivate: [AdminGuard]
     },
     {
