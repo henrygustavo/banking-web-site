@@ -27,7 +27,7 @@ export class BankAccountListComponent implements OnInit {
       { prop: 'isLocked' , name: 'Locked'  },
       { prop: 'balance' , name: 'Balance'  },
       { prop: '', name: '', cellTemplate: this.editTmplRow}];
-  
+
     this. rows = [
                 { id: '1', number: '001104860195023275', customerName: ' Henry Fuentes' , isLocked: 'false', balance: '100'},
                 { id: '2', number: '001104860195023276', customerName: ' Boris Vera' , isLocked: 'false', balance: '200'},

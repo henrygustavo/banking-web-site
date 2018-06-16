@@ -20,7 +20,9 @@ import { BankAccountSearchComponent } from './bank-account/bank-account-search/b
     ReactiveFormsModule,
     adminRoutes
   ],
-  declarations: [DashBoardComponent, CustomerListComponent, CustomerEditComponent, BankAccountEditComponent, BankAccountListComponent, BankAccountSearchComponent],
+  declarations: [DashBoardComponent, CustomerListComponent,
+                CustomerEditComponent, BankAccountEditComponent,
+                BankAccountListComponent, BankAccountSearchComponent],
   providers: [AdminGuard, BankAccountService, CustomerService]
 
 })

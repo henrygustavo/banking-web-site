@@ -27,7 +27,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
   subscription: Subscription = new Subscription();
   mainForm: FormGroup;
   bankAccount: BankAccount;
-  customerId: number;
+  customerId: number = 0;
 
   constructor(private _menuService: MenuService,
               private _bankAccountService: BankAccountService,
@@ -66,7 +66,6 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
     console.log(customerId);
     this.customerId = customerId;
-    
   }
 
   setUpValidationMessages(): void {
@@ -100,6 +99,11 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
         });
 
         this.subscription.add(formSubscription);
+  }
+
+  hasCustomerId(): boolean {
+
+     return (this.customerId !== undefined && this.customerId !== 0 );
   }
 
   save(): void {
