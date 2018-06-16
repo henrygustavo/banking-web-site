@@ -8,7 +8,7 @@
     <!-- /.row -->
     <form novalidate (ngSubmit)="save()" [formGroup]="mainForm">
         <div class="row">
-            <div class="col-md-4 well col-lg-offset-4">
+            <div class="col-md-6 well col-lg-offset-3">
                 <div class="form-group">
                     <div [ngClass]="{'has-error': displayMessage.firstName }">
                         <input class="form-control" placeholder="Fist Name" formControlName="firstName" />
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 well col-lg-offset-4">
+            <div class="col-md-6 well col-lg-offset-3">
                 <div class="form-group">
                     <div class="col-md-3">
                         <a [routerLink]="['/customers']" class="btn btn-default btn-block">Back</a>

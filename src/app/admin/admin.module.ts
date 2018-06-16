@@ -11,6 +11,7 @@ import { BankAccountListComponent } from './bank-account/bank-account-list/bank-
 import { BankAccountService } from './services/bank-account.service';
 import { CustomerService } from './services/customer.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BankAccountSearchComponent } from './bank-account/bank-account-search/bank-account-search.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     adminRoutes
   ],
-  declarations: [DashBoardComponent, CustomerListComponent, CustomerEditComponent, BankAccountEditComponent, BankAccountListComponent],
+  declarations: [DashBoardComponent, CustomerListComponent, CustomerEditComponent, BankAccountEditComponent, BankAccountListComponent, BankAccountSearchComponent],
   providers: [AdminGuard, BankAccountService, CustomerService]
 
 })

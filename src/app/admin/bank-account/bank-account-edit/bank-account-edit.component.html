@@ -7,28 +7,11 @@
   </div>
   <!-- /.row -->
   <div class="row">
-    <div class="col-md-4 well col-lg-offset-4">
-      <div class="form-group">
-        <div class="input-group">
-          <input type="text" name="dni" placeholder="DNI Customer" class="form-control"  maxlength="8"/>
-          <span class="input-group-btn">
-            <button type="submit" class="btn  btn-default btn-block">Search</button>
-          </span>
-        </div>
-      </div>
-    </div>
+    <app-bank-account-search (onSearch)="onSearch($event)"></app-bank-account-search>
   </div>
   <form novalidate (ngSubmit)="save()" [formGroup]="mainForm">
     <div class="row">
-      <div class="col-md-4 well col-lg-offset-4">
-        <div class="form-group">
-          <div [ngClass]="{'has-error': displayMessage.customerName }">
-            <input class="form-control" placeholder="Customer Name" formControlName="customerName" readonly />
-            <span class="help-block" *ngIf="displayMessage.customerName">
-              {{displayMessage.customerName}}
-            </span>
-          </div>
-        </div>
+      <div class="col-md-6 well col-lg-offset-3">
         <div class="form-group">
           <div [ngClass]="{'has-error': displayMessage.number }">
             <input class="form-control" placeholder="Account Number" formControlName="number" maxlength="18" />
@@ -46,7 +29,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 well col-lg-offset-4">
+      <div class="col-md-6 well col-lg-offset-3">
         <div class="form-group">
           <div class="col-md-3">
             <a [routerLink]="['/bank-accounts']" class="btn btn-default btn-block">Back</a>

@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, OnDestroy }
 import { MenuService } from '../../../shared/services/menu.service';
 import { BankAccountService } from '../../services/bank-account.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { Dictionary } from '../../models/dictionary';
 import { GenericValidator } from '../../../shared/validators/generic-validator';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControlName, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -18,17 +17,17 @@ import {CustomValidators} from 'ng2-validation';
   styleUrls: ['./bank-account-edit.component.css']
 })
 export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestroy  {
-  
-  @BlockUI()blockUI : NgBlockUI;
+
+  @BlockUI()blockUI: NgBlockUI;
   @ViewChildren(FormControlName, {read: ElementRef})
-  formInputElements : ElementRef[] = [];
-  displayMessage : {[key : string]: string} = {};
-  roles : Array < Dictionary > = [];
-  validationMessages : {[key : string]: {[key : string]: string}};
-  genericValidator : GenericValidator;
-  subscription : Subscription = new Subscription();
-  mainForm : FormGroup;
-  bankAccount : BankAccount;
+  formInputElements: ElementRef[] = [];
+  displayMessage: {[key: string]: string} = {};
+  validationMessages: {[key: string]: {[key: string]: string}};
+  genericValidator: GenericValidator;
+  subscription: Subscription = new Subscription();
+  mainForm: FormGroup;
+  bankAccount: BankAccount;
+  customerId: number;
 
   constructor(private _menuService: MenuService,
               private _bankAccountService: BankAccountService,
@@ -48,10 +47,10 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
   ngAfterViewInit(): void {
 
-    let controlBlurs: Observable<any>[] = this.formInputElements
+    const controlBlurs: Observable<any>[] = this.formInputElements
         .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
 
-    let controlSubscription = Observable.merge(this.mainForm.valueChanges, ...controlBlurs).debounceTime(800).subscribe(() => {
+    const controlSubscription = Observable.merge(this.mainForm.valueChanges, ...controlBlurs).debounceTime(800).subscribe(() => {
         this.displayMessage = this.genericValidator.processMessages(this.mainForm);
     });
 
@@ -63,12 +62,17 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
     this.subscription.unsubscribe();
   }
 
-  setUpValidationMessages() : void {
+  onSearch(customerId: number): void {
+
+    console.log(customerId);
+    this.customerId = customerId;
+    
+  }
+
+  setUpValidationMessages(): void {
 
     this.validationMessages = {
 
-      customerName: {
-                      required: 'Customer Name is required.'},
       number: {
                       required: 'Bank Account Number is required.',
                       digits: 'Please enter a valid number.',
@@ -89,8 +93,8 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
             this.mainForm = this.formBuilder.group({
                 id: id,
-                customerName: new FormControl( '' ,[Validators.required]),
-                number: new FormControl( '' ,[Validators.required, CustomValidators.digits, CustomValidators.rangeLength([18, 18])]),
+                number: new FormControl( '' , [Validators.required, CustomValidators.digits,
+                                               CustomValidators.rangeLength([18, 18])]),
                 isLocked: new FormControl('')
             });
         });
@@ -102,7 +106,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
     if (this.mainForm.dirty && this.mainForm.valid) {
         // Copy the form values over the product object values
-        let model = Object.assign({}, this.bankAccount, this.mainForm.value);
+        const model = Object.assign({}, this.bankAccount, this.mainForm.value);
 
         this.blockUI.start();
  /*        let saveSubscription =  this._customerService.save(model, Number(model.id)).subscribe(
@@ -111,16 +115,15 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
                     this._messageAlertHandleService.handleSuccess('Saved successfully');
                     this.mainForm.reset();
                     this.blockUI.stop();
-                    this._router.navigate(['/customers']);
+                    this._router.navigate(['/bank-accounts']);
          /*    },
             error => {
                 this._messageAlertHandleService.handleError(error);
                 this.blockUI.stop();
             }
-         ); 
+         );
 
         this.subscription.add(saveSubscription);*/
     }
   }
-
 }

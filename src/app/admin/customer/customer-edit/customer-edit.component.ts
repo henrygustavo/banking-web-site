@@ -18,19 +18,18 @@ import 'rxjs/add/observable/merge';
 @Component({selector: 'app-customer-edit', templateUrl: './customer-edit.component.html', styleUrls: ['./customer-edit.component.css']})
 export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @BlockUI()blockUI : NgBlockUI;
+  @BlockUI()blockUI: NgBlockUI;
   @ViewChildren(FormControlName, {read: ElementRef})
-  formInputElements : ElementRef[] = [];
-  displayMessage : {[key : string]: string} = {};
-  roles : Array < Dictionary > = [];
-  validationMessages : {[key : string]: {[key : string]: string}};
-  genericValidator : GenericValidator;
-  subscription : Subscription = new Subscription();
-  mainForm : FormGroup;
-  customer : Customer;
+  formInputElements: ElementRef[] = [];
+  displayMessage: {[key: string]: string} = {};
+  validationMessages: {[key: string]: {[key: string]: string}};
+  genericValidator: GenericValidator;
+  subscription: Subscription = new Subscription();
+  mainForm: FormGroup;
+  customer: Customer;
 
-  constructor(private _menuService : MenuService,
-              private _customerService : CustomerService,
+  constructor(private _menuService: MenuService,
+              private _customerService: CustomerService,
               private _messageAlertHandleService: MessageAlertHandleService,
               private _route: ActivatedRoute,
               private _router: Router,
@@ -61,7 +60,7 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.subscription.unsubscribe();
     }
 
-    setUpValidationMessages() : void {
+    setUpValidationMessages(): void {
 
       this.validationMessages = {
 
@@ -88,8 +87,8 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
             this.mainForm = this.formBuilder.group({
                 id: id,
-                firstName: new FormControl( '' ,[Validators.required, Validators.minLength(2)]),
-                lastName: new FormControl( '' ,[Validators.required, Validators.minLength(2)])
+                firstName: new FormControl( '' , [Validators.required, Validators.minLength(2)]),
+                lastName: new FormControl( '' , [Validators.required, Validators.minLength(2)])
             });
         });
 
@@ -115,7 +114,7 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._messageAlertHandleService.handleError(error);
                 this.blockUI.stop();
             }
-         ); 
+         );
 
         this.subscription.add(saveSubscription);*/
     }
