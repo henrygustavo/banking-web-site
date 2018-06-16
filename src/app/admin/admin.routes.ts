@@ -41,7 +41,7 @@ const routes: Route[] = [
         canActivate: [AdminGuard]
     },
     {
-        path: 'transactions/create',
+        path: 'transactions/create/:id',
         component: TransactionCreateComponent,
         canActivate: [AdminGuard]
     },

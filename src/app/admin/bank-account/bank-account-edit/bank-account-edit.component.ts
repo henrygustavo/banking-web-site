@@ -111,7 +111,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
   save(): void {
 
-    if (this.mainForm.dirty && this.mainForm.valid) {
+    if (this.mainForm.valid) {
         const model = Object.assign({}, this.bankAccount, this.mainForm.value);
 
         this.blockUI.start();

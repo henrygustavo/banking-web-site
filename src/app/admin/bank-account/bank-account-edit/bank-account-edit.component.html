@@ -9,7 +9,7 @@
   <div class="row">
     <app-bank-account-search (onSearch)="onSearch($event)"></app-bank-account-search>
   </div>
-  <form novalidate (ngSubmit)="save()" [formGroup]="mainForm">
+  <form [formGroup]="mainForm">
     <div class="row">
       <div class="col-md-6 well col-lg-offset-3">
         
@@ -41,7 +41,8 @@
             <a [routerLink]="['/bank-accounts']" class="btn btn-default btn-block">Back</a>
           </div>
           <div class="col-md-9">
-            <button type="submit" class="btn btn-primary btn-block" [disabled]="!mainForm.valid || !hasCustomerId()">Save</button>
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="!mainForm.valid || !hasCustomerId()"
+            (click)="save()">Save</button>
           </div>
         </div>
       </div>
