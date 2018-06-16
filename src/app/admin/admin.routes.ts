@@ -6,6 +6,8 @@ import { CustomerEditComponent } from './customer/customer-edit/customer-edit.co
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 import { BankAccountListComponent } from './bank-account/bank-account-list/bank-account-list.component';
 import { BankAccountEditComponent } from './bank-account/bank-account-edit/bank-account-edit.component';
+import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
+import { TransactionCreateComponent } from './transaction/transaction-create/transaction-create.component';
 
 const routes: Route[] = [
     {
@@ -31,6 +33,16 @@ const routes: Route[] = [
     {
         path: 'bank-accounts/edit/:id',
         component: BankAccountEditComponent,
+        canActivate: [AdminGuard]
+    },
+    {
+        path: 'transactions',
+        component: TransactionListComponent,
+        canActivate: [AdminGuard]
+    },
+    {
+        path: 'transactions/create',
+        component: TransactionCreateComponent,
         canActivate: [AdminGuard]
     },
     {

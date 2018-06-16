@@ -12,6 +12,8 @@ import { BankAccountService } from './services/bank-account.service';
 import { CustomerService } from './services/customer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BankAccountSearchComponent } from './bank-account/bank-account-search/bank-account-search.component';
+import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
+import { TransactionCreateComponent } from './transaction/transaction-create/transaction-create.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,7 @@ import { BankAccountSearchComponent } from './bank-account/bank-account-search/b
   ],
   declarations: [DashBoardComponent, CustomerListComponent,
                 CustomerEditComponent, BankAccountEditComponent,
-                BankAccountListComponent, BankAccountSearchComponent],
+                BankAccountListComponent, BankAccountSearchComponent, TransactionListComponent, TransactionCreateComponent],
   providers: [AdminGuard, BankAccountService, CustomerService]
 
 })

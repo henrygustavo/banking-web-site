@@ -15,7 +15,8 @@ export class MenuService {
 
             new MenuItem('fa-home', 'dashboard', 'dashboard', 'DashBoard'),
             new MenuItem('fa-edit', 'customers', 'customers', 'Customers'),
-            new MenuItem('fa-edit', 'bank-accounts', 'bank-accounts', 'Bank Accounts')
+            new MenuItem('fa-edit', 'bank-accounts', 'bank-accounts', 'Bank Accounts'),
+            new MenuItem('fa-edit', 'transactions', 'transactions', 'Transactions')
         ];
     }
 
