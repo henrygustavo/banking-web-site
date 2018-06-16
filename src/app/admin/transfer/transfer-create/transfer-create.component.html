@@ -1,8 +1,53 @@
-<div id="page-wrapper">
+<div id="page-wrapper" *ngIf="mainForm">
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header test">Payment Transfer</h1>
-    </div>
+      <div class="col-lg-12">
+        <h1 class="page-header test">Payment Transfer</h1>
+      </div>
+      <!-- /.col-lg-12 -->
   </div>
+  <!-- /.row -->
+  <form novalidate (ngSubmit)="transfer()" [formGroup]="mainForm">
+      <div class="row">
+          <div class="col-md-6 well col-lg-offset-3">
+              <div class="form-group">
+                  <div [ngClass]="{'has-error': displayMessage.sourceAccountNumber }">
+                      <input class="form-control" placeholder="Source Account Number" formControlName="sourceAccountNumber" readonly maxlength="18"  />
+                      <span class="help-block" *ngIf="displayMessage.sourceAccountNumber">
+                          {{displayMessage.sourceAccountNumber}}
+                      </span>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div [ngClass]="{'has-error': displayMessage.destinyAccountNumber }">
+                      <input class="form-control" placeholder="Destiny Account Number" formControlName="destinyAccountNumber" maxlength="18" />
+                      <span class="help-block" *ngIf="displayMessage.destinyAccountNumber">
+                          {{displayMessage.destinyAccountNumber}}
+                      </span>
+                  </div>
+              </div>
+              <div class="form-group">
+                <div [ngClass]="{'has-error': displayMessage.amount }">
+                    <input class="form-control" placeholder="Amount" formControlName="amount" />
+                    <span class="help-block" *ngIf="displayMessage.amount">
+                        {{displayMessage.amount}}
+                    </span>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 well col-lg-offset-3">
+              <div class="form-group">
+                  <div class="col-md-3">
+                      <a [routerLink]="['/transfers']" class="btn btn-default btn-block">Back</a>
+                  </div>
+                  <div class="col-md-9">
+                      <button type="submit" class="btn btn-primary btn-block" [disabled]="!mainForm.valid">Transfer</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
 </div>
+<!-- /#page-wrapper -->
 

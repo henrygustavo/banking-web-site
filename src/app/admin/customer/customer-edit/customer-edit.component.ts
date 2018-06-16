@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChildren, ElementRef, AfterViewInit, OnDestroy} f
 import {MenuService} from '../../../shared/services/menu.service';
 import {CustomerService} from '../../services/customer.service';
 import {BlockUI, NgBlockUI} from 'ng-block-ui';
-import {Dictionary} from '../../models/dictionary';
 import {Subscription} from 'rxjs/Subscription';
 import {FormGroup, FormControlName, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Customer} from '../../models/customer';
