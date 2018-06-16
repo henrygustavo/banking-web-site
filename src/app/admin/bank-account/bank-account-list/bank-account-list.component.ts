@@ -25,14 +25,13 @@ export class BankAccountListComponent implements OnInit {
       { prop: 'number' , name: 'Number' },
       { prop: 'customerName' , name: 'Customer Name'  },
       { prop: 'isLocked' , name: 'Locked'  },
-      { prop: 'balance' , name: 'Balance'  },
       { prop: '', name: '', cellTemplate: this.editTmplRow}];
 
     this. rows = [
-                { id: '1', number: '001104860195023275', customerName: ' Henry Fuentes' , isLocked: 'false', balance: '100'},
-                { id: '2', number: '001104860195023276', customerName: ' Boris Vera' , isLocked: 'false', balance: '200'},
-                { id: '3', number: '001104860195023277', customerName: ' Frank Jonislla' , isLocked: 'false', balance: '300'},
-                { id: '4', number: '001104860195023278', customerName: ' Felipe Llancachagua' , isLocked: 'false', balance: '400'}];
+                { id: '1', number: '001104860195023275', customerName: ' Henry Fuentes' , isLocked: 'false'},
+                { id: '2', number: '001104860195023276', customerName: ' Boris Vera' , isLocked: 'false'},
+                { id: '3', number: '001104860195023277', customerName: ' Frank Jonislla' , isLocked: 'false'},
+                { id: '4', number: '001104860195023278', customerName: ' Felipe Llancachagua' , isLocked: 'false'}];
   }
 
 }
