@@ -26,8 +26,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
   genericValidator: GenericValidator;
   subscription: Subscription = new Subscription();
   mainForm: FormGroup;
-  bankAccount: BankAccount;
-  customerId: number = 0;
+  bankAccount: BankAccount = new  BankAccount();
 
   constructor(private _menuService: MenuService,
               private _bankAccountService: BankAccountService,
@@ -64,8 +63,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
   onSearch(customerId: number): void {
 
-    console.log(customerId);
-    this.customerId = customerId;
+    this.bankAccount.customerId = customerId;
   }
 
   setUpValidationMessages(): void {
@@ -103,13 +101,17 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
 
   hasCustomerId(): boolean {
 
-     return (this.customerId !== undefined && this.customerId !== 0 );
+     return (this.bankAccount.customerId !== undefined
+            && this.bankAccount.customerId !== 0 );
+  }
+
+  generateAccountNumber(): void {
+    this.mainForm.controls['number'].setValue('001104860195023275');
   }
 
   save(): void {
 
     if (this.mainForm.dirty && this.mainForm.valid) {
-        // Copy the form values over the product object values
         const model = Object.assign({}, this.bankAccount, this.mainForm.value);
 
         this.blockUI.start();
