@@ -15,6 +15,7 @@ script:
 
 before_deploy:
   cd dist
+
 deploy:
    provider: cloudfoundry
    username:

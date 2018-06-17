@@ -31,7 +31,7 @@ export class BankAccountListComponent implements OnInit {
                 { id: '1', number: '001104860195023275', customerName: ' Henry Fuentes' , isLocked: 'false'},
                 { id: '2', number: '001104860195023276', customerName: ' Boris Vera' , isLocked: 'false'},
                 { id: '3', number: '001104860195023277', customerName: ' Frank Jonislla' , isLocked: 'false'},
-                { id: '4', number: '001104860195023278', customerName: ' Felipe Llancachagua' , isLocked: 'true'}];
+                { id: '4', number: '001104860195023278', customerName: ' Felipe Llancachagua' , isLocked: 'false'}];
   }
 
 }
