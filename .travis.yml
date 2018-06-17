@@ -7,14 +7,13 @@ branches:
   only:
     - master
 
-before_script:
-  - npm install -g @angular/cli
+before_script: # commands to run before the build step
+   - npm install -g --silent @angular/cli
 
 script:
   - ng build --prod
 
-before_deploy:
-  cd dist
+before_deploy: cd dist
 
 deploy:
    provider: cloudfoundry
@@ -26,3 +25,8 @@ deploy:
    organization:
     secure: "PKecACsO9S9lKCX8MfFBevJKoaLDNrLO/6v0cuQKBPwl2UuvaA8XketyDgqvjqYam7iG1tjtLCWVYcudMgOcZaju9dXPgplM4a9c50R8/w6nOPLOQBgPLiG9NtlM55mZ16OaNyowVdSmxh4onbuvoOTYfO5y8Auejf6worYJ4Q13HIhqulgyjPMe60r+tewE6cwS4j/j1dW7M03Zw31OOopH2KTTY82VcE3TQPv8QQOKHXPbPBJq1oK1/TcdohkyLckvykjLIPEobhJyVXtNZXYMGrvpjRQE80ZmN3vJzBA2RsRc19x/GKi3mDnHcilEpG/zJ+3uXL3oyYZ5JJKdfy8nkZtiBk15+PIyKCGo8gEHgUNbFt+yoSg+Q4fNXPNUnhV1KIVpphPaXTyE/j/5NlKj2ZvfnWUCu90Wc8zZ+lRxRVvhCZDqD360w3gfU5Zx7xKmX2m9qUXjeG9Rnw1cxnAjX6W6hAHx0gXf0jiyNaDPyTR8EWGRwyMqDXVUrebg31/uGm+ZumFb/P9e1MlxxSLnOupb2YizOpPHtInWyNw4UGAH/SgoRxlsASFGAi4ZmctVECfD5GZkTPLwsixOPtxJQbxjbr95bPAplGX+FEC+0B4sEowXQT328f3NOGdYzZ87Cbh0foFwFa/uxAb8FV1Qtlo7GofTREt9oGbBQZM="
    space: development
+
+notifications:
+  email: # only receive email when the build status changes (someone broke the build!) 
+    on_failure: change
+    on_success: change    
