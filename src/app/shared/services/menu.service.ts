@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/observable';
 import { MenuItem } from '../models/menu-item';
 
 @Injectable()
@@ -23,7 +22,7 @@ export class MenuService {
         this.subject.next({ text: selectedMenuItem });
     }
 
-    public getSelectedMenuItem(): Observable<any> {
+    public getSelectedMenuItem(): any {
         return this.subject.asObservable();
     }
 }
