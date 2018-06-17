@@ -12,7 +12,9 @@ before_script:
 
 script:
   - ng build --prod
- 
+
+before_deploy:
+  cd dist
 deploy:
    provider: cloudfoundry
    username:
