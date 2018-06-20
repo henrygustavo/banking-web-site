@@ -11,7 +11,6 @@ import { PaginationResult } from '../models/pagination-result';
 import { Pagination } from '../models/pagination';
 import { environment } from '../../../environments/environment';
 
-@Injectable()
 export abstract class BaseResourceService<T> {
 
     public baseUrl = '';
