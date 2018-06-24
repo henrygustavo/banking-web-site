@@ -13,6 +13,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({selector: 'app-customer-edit', templateUrl: './customer-edit.component.html', styleUrls: ['./customer-edit.component.css']})
 export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -63,6 +64,11 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.validationMessages = {
 
+        dni: {
+              required: 'DNI is required.',
+              rangeLength: 'DNI must have 8 numbers.',
+              digits: 'Please enter a valid number.'
+        },
         firstName: {
           required: 'Fist Name is required.',
           minlength: 'Fist Name must be at least 2 characters.'
@@ -86,6 +92,8 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
             this.mainForm = this.formBuilder.group({
                 id: id,
+                dni: new FormControl( '' , [Validators.required,  CustomValidators.rangeLength([8, 8]),
+                                                                  CustomValidators.digits]),
                 firstName: new FormControl( '' , [Validators.required, Validators.minLength(2)]),
                 lastName: new FormControl( '' , [Validators.required, Validators.minLength(2)])
             });
