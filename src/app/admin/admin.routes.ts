@@ -9,47 +9,57 @@ import { BankAccountEditComponent } from './bank-account/bank-account-edit/bank-
 import { TransferListComponent } from './transfer/transfer-list/transfer-list.component';
 import { TransferCreateComponent } from './transfer/transfer-create/transfer-create.component';
 
+import {NgxPermissionsGuard} from 'ngx-permissions';
+
 const routes: Route[] = [
     {
         path: 'dashboard',
         component: DashBoardComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['ADMIN', 'MEMBER']}}
     },
     {
         path: 'customers',
         component: CustomerListComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['ADMIN']}}
     },
     {
         path: 'customers/edit/:id',
         component: CustomerEditComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['ADMIN']}}
     },
     {
         path: 'bank-accounts',
         component: BankAccountListComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['ADMIN']}}
     },
     {
         path: 'bank-accounts/edit/:id',
         component: BankAccountEditComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['ADMIN']}}
     },
     {
         path: 'transfers',
         component: TransferListComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['MEMBER']}}
     },
     {
         path: 'transfers/create/:id',
         component: TransferCreateComponent,
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['MEMBER']}}
     },
     {
         path: '**',
         redirectTo: 'dashboard',
         pathMatch: 'full',
-        canActivate: [AdminGuard]
+        canActivate: [AdminGuard, NgxPermissionsGuard],
+        data: { permissions: { only: ['ADMIN', 'MEMBER']}}
     }
 ];
 

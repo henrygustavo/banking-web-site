@@ -32,9 +32,9 @@
   <div class="navbar-default sidebar" role="navigation">
       <div class="sidebar-nav navbar-collapse">
           <ul class="nav" id="side-menu">
-              <li *ngFor="let menuItem of menuItems" [class.activeView]="menuItem.value == selectedMenuItem">
-
-                  <a [routerLink]="[menuItem.url]">
+              <li *ngFor="let menuItem of menuItems"
+                  [class.activeView]="menuItem.value == selectedMenuItem">
+                  <a [routerLink]="[menuItem.url]" *ngxPermissionsOnly="menuItem.roles">
                       <i class="fa {{menuItem.icon}} fa-fw"></i>
                       {{menuItem.name}}
                   </a>

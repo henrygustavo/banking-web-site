@@ -32,7 +32,8 @@
     "ng2-toastr": "^4.1.2",
     "ng2-ui-auth": "^7.0.2",
     "ng2-validation": "^4.2.0",
-    "@swimlane/ngx-datatable": "11.3.0"
+    "@swimlane/ngx-datatable": "11.3.0",
+    "ngx-permissions": "^3.0.0"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",

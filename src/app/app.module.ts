@@ -14,6 +14,8 @@ import { MessageAlertHandleService } from './shared/services/message-alert.servi
 import { HeaderComponent } from './shared/components/header/header.component';
 import { MenuService } from './shared/services/menu.service';
 
+import { NgxPermissionsModule } from 'ngx-permissions';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import { MenuService } from './shared/services/menu.service';
     BrowserModule,
     BrowserAnimationsModule,
     Ng2UiAuthModule.forRoot(AuthConfig),
+    NgxPermissionsModule.forRoot(),
     ToastModule.forRoot(),
     BlockUIModule.forRoot(
       {

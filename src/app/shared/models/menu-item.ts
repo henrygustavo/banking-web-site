@@ -3,7 +3,8 @@ export class MenuItem {
         public icon: string,
         public value: string,
         public url: string,
-        public name: string
+        public name: string,
+        public roles: Array<any>
     ) {
     }
 }

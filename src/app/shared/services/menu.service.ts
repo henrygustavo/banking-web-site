@@ -11,10 +11,10 @@ export class MenuService {
 
         return [
 
-            new MenuItem('fa-home', 'dashboard', 'dashboard', 'DashBoard'),
-            new MenuItem('fa-edit', 'customers', 'customers', 'Customers'),
-            new MenuItem('fa-edit', 'bank-accounts', 'bank-accounts', 'Bank Accounts'),
-            new MenuItem('fa-credit-card', 'transfers', 'transfers', 'Payment/Transfers')
+            new MenuItem('fa-home', 'dashboard', 'dashboard', 'DashBoard', ['ADMIN', 'MEMBER']),
+            new MenuItem('fa-edit', 'customers', 'customers', 'Customers', ['ADMIN']),
+            new MenuItem('fa-edit', 'bank-accounts', 'bank-accounts', 'Bank Accounts', ['ADMIN']),
+            new MenuItem('fa-credit-card', 'transfers', 'transfers', 'Payment/Transfers', ['MEMBER'])
         ];
     }
 
