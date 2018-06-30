@@ -3,11 +3,12 @@
     <div class="form-group">
       <div class="input-group">
         <div [ngClass]="{'has-error': displayMessage.dni }">
-          <input type="text" name="dni" placeholder="DNI" formControlName="dni" class="form-control" maxlength="8" />
+          <input type="text" name="dni" placeholder="DNI" formControlName="dni"
+          class="form-control" maxlength="8" #dni/>
         </div>
         <span class="input-group-btn">
           <button class="btn  btn-default btn-block" [disabled]="!searchForm.valid"
-          (click)="search()">Search</button>
+          (click)="search(dni.value)">Search</button>
         </span>
       </div>
       <div [ngClass]="{'has-error': displayMessage.dni }">

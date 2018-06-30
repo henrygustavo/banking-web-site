@@ -7,4 +7,5 @@ export class Customer extends BaseEntity {
     lastName: string;
     userName: string;
     email: string;
+    fullName: string;
 }

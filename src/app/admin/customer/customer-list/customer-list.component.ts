@@ -60,7 +60,6 @@ export class CustomerListComponent implements OnInit, OnDestroy {
       let userGetAllSubscription = this._customerService.getAll(this.pagination).subscribe(
           (response: PaginationResult) => {
 
-            console.log(response);
                       this.pagination.totalRecords = response.totalRecords;
                       this.pagination.totalPages = response.totalPages;
 
