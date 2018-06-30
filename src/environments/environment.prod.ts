@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl : 'https://hfuentes-webapi.azurewebsites.net/api/'
+  apiUrl : 'https://banking-web-api-optimistic-aligator.cfapps.io/api/'
 };

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-   apiUrl : 'https://hfuentes-webapi.azurewebsites.net/api/'
+   apiUrl : 'http://localhost:60887/api/'
 };
 
 /*

@@ -34,6 +34,38 @@
                         </span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div [ngClass]="{'has-error': displayMessage.userName }">
+                        <input class="form-control" placeholder="User Name" formControlName="userName" />
+                        <span class="help-block" *ngIf="displayMessage.userName">
+                            {{displayMessage.userName}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div [ngClass]="{'has-error': displayMessage.email }">
+                        <input class="form-control" type="email" placeholder="Email" formControlName="email" />
+                        <span class="help-block" *ngIf="displayMessage.email">
+                            {{displayMessage.email}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div [ngClass]="{'has-error': displayMessage.password }">
+                        <input class="form-control" type="password" placeholder="Password" formControlName="password" />
+                        <span class="help-block" *ngIf="displayMessage.password">
+                            {{displayMessage.password}}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div [ngClass]="{'has-error': displayMessage.confirmPassword }">
+                        <input class="form-control" type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
+                        <span class="help-block" *ngIf="displayMessage.confirmPassword">
+                            {{displayMessage.confirmPassword}}
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
