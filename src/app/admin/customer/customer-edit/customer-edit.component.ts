@@ -125,7 +125,8 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
           email: new FormControl({ value: '', disabled: isAddingNewCustomer },
                 [Validators.required, Validators.minLength(4), CustomValidators.email]),
           password: password,
-          confirmPassword: confirmPassword
+          confirmPassword: confirmPassword,
+          active: new FormControl(true)
         });
 
         this.getModel(id);
@@ -176,7 +177,8 @@ export class CustomerEditComponent implements OnInit, AfterViewInit, OnDestroy {
             userName: response.userName,
             email: response.email,
             password: 'xxxxxx-xxxxx',
-            confirmPassword: 'xxxxxx-xxxxx'
+            confirmPassword: 'xxxxxx-xxxxx',
+            active : response.active
           });
 
         this.blockUI.stop();

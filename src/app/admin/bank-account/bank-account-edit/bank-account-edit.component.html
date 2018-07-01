@@ -7,7 +7,12 @@
   </div>
   <!-- /.row -->
   <div class="row">
-    <app-customer-search (onSearch)="onSearch($event)"></app-customer-search>
+    <app-customer-search 
+    (onSearch)="onSearch($event)"
+    [customerFullName] = "bankAccount.customerFullName";
+    [customerDni] = "bankAccount.customerDni";
+    [isDisabled] = "disabled()";
+    ></app-customer-search>
   </div>
   <form [formGroup]="mainForm">
     <div class="row">
@@ -22,7 +27,7 @@
               </div>
             <span class="input-group-btn">
               <button class="btn  btn-default btn-block"
-              (click)="generateAccountNumber()">Generate</button>
+              (click)="generateAccountNumber()"  [disabled]=disabled()>Generate</button>
             </span>
           </div>
 

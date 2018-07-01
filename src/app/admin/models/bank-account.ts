@@ -5,6 +5,7 @@ export class BankAccount extends BaseEntity {
      number: String;
      balance: number;
      isLocked: boolean;
-     customerName: String;
+     customerFullName: String;
      customerId: number;
+     customerDni: number;
 }

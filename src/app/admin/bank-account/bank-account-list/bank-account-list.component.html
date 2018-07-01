@@ -12,9 +12,10 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <ngx-datatable [rows]="rows" class="material" [columns]="columns" 
-                           [rowHeight]="'auto'" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40">
-            </ngx-datatable>
+            <ngx-datatable [rows]="rows" class="material" [rowHeight]="'auto'" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40"
+            [columns]="columns" [externalPaging]="true" [count]="pagination.totalRecords" [offset]="pagination.currentPage-1"  (page)='setPage($event)'
+            [limit]="pagination.pageSize">
+        </ngx-datatable>
           </div>
         </div>
       </div>

@@ -44,8 +44,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
       this. columns = [
         { prop: 'id' , name: 'id' },
         { prop: 'dni' , name: 'DNI' },
-        { prop: 'firstName' , name: 'First Name' },
-        { prop: 'lastName' , name: 'Last Name'  },
+        { prop: 'fullName' , name: 'Full Name' },
+        { prop: 'active' , name: 'Active'  },
         { prop: '', name: '', cellTemplate: this.editTmplRow}];
 
       this.pagination.currentPage = 1;

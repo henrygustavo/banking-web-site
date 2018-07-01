@@ -8,4 +8,5 @@ export class Customer extends BaseEntity {
     userName: string;
     email: string;
     fullName: string;
+    active: boolean;
 }
