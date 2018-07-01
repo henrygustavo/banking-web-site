@@ -42,9 +42,8 @@ export class BankAccountListComponent implements OnInit, OnDestroy {
   initializePagination (): void {
 
   this. columns = [
-      { prop: 'id' , name: 'id' },
       { prop: 'number' , name: 'Number' },
-      { prop: 'customerFullName' , name: 'Customer Full Name'  },
+      { prop: 'customerFullName' , name: 'Customer'  },
       { prop: 'isLocked' , name: 'Locked'  },
       { prop: '', name: '', cellTemplate: this.editTmplRow}];
 

@@ -9,9 +9,9 @@
   <div class="row">
     <app-customer-search 
     (onSearch)="onSearch($event)"
-    [customerFullName] = "bankAccount.customerFullName";
-    [customerDni] = "bankAccount.customerDni";
-    [isDisabled] = "disabled()";
+    [customerFullName] = "bankAccount.customerFullName"
+    [customerDni] = "bankAccount.customerDni"
+    [isDisabled] = "disabled()"
     ></app-customer-search>
   </div>
   <form [formGroup]="mainForm">
@@ -20,14 +20,15 @@
         
         <div class="input-group">
             <div [ngClass]="{'has-error': displayMessage.number }">
-                <input class="form-control" placeholder="Account Number" formControlName="number" maxlength="18" readonly />
-                <span class="help-block" *ngIf="displayMessage.number">
+                <input class="form-control" placeholder="Account Number"
+                formControlName="number" maxlength="18" readonly />
+                <span class="help-block" *ngIf="displayMessage.number" >
                   {{displayMessage.number}}
                 </span>
               </div>
             <span class="input-group-btn">
               <button class="btn  btn-default btn-block"
-              (click)="generateAccountNumber()"  [disabled]=disabled()>Generate</button>
+              (click)="generateNumber()"  [disabled]=disabled()>Generate</button>
             </span>
           </div>
 
@@ -46,7 +47,7 @@
             <a [routerLink]="['/bank-accounts']" class="btn btn-default btn-block">Back</a>
           </div>
           <div class="col-md-9">
-            <button type="submit" class="btn btn-primary btn-block" [disabled]="!mainForm.valid || !hasCustomerId()"
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="!mainForm.valid"
             (click)="save()">Save</button>
           </div>
         </div>

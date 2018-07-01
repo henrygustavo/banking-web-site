@@ -1,14 +1,16 @@
 <div class="col-md-6 well col-lg-offset-3">
   <form novalidate [formGroup]="searchForm">
     <div class="form-group">
-      <div class="input-group">
+
+      <div *ngIf="customerDni">
+        <input class="form-control" placeholder="DNI" readonly value="{{customerDni}}" />
+      </div>
+      <div class="input-group" *ngIf="!customerDni">
         <div [ngClass]="{'has-error': displayMessage.dni }">
-          <input type="text" name="dni" placeholder="DNI" formControlName="dni"
-          class="form-control" maxlength="8" #dni disabled="isDisabled"/>
+          <input type="text" name="dni" placeholder="DNI" formControlName="dni" class="form-control" maxlength="8" #dni/>
         </div>
         <span class="input-group-btn">
-          <button class="btn  btn-default btn-block" [disabled]="!searchForm.valid"
-          (click)="search(dni.value)">Search</button>
+          <button class="btn  btn-default btn-block" [disabled]="!searchForm.valid" (click)="search(dni.value)">Search</button>
         </span>
       </div>
       <div [ngClass]="{'has-error': displayMessage.dni }">
@@ -18,8 +20,7 @@
       </div>
     </div>
     <div class="form-group">
-      <input class="form-control" placeholder="Customer Full Name"
-            readonly value="{{fullName}}"/>
+      <input class="form-control" placeholder="Customer" readonly value="{{customerFullName}}" />
     </div>
   </form>
 </div>

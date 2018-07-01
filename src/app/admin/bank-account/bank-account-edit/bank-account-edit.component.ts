@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren,
+        ElementRef, OnDestroy } from '@angular/core';
 import { MenuService } from '../../../shared/services/menu.service';
 import { BankAccountService } from '../../services/bank-account.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -87,7 +88,7 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
         (params): void => {
 
             const id: number = Number(params['id']);
-
+            this.bankAccount.id = id;
             this.mainForm = this.formBuilder.group({
                 id: id,
                 number: new FormControl( '' , [Validators.required, CustomValidators.digits,
@@ -107,11 +108,11 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
             && this.bankAccount.customerId !== 0 );
   }
 
-  generateAccountNumber(): void {
+  generateNumber(): void {
 
     this.blockUI.start();
 
-    let searchSubscription = this._bankAccountService.generateAccountNumber().subscribe(
+    let searchSubscription = this._bankAccountService.generateNumber().subscribe(
       (response: any) => {
 
         this.mainForm.controls['number'].setValue(response.accountNumber);
@@ -162,7 +163,6 @@ export class BankAccountEditComponent implements  OnInit, AfterViewInit, OnDestr
       (response: BankAccount) => {
 
         this.bankAccount = response;
-
         this.mainForm.patchValue(
           {
             id: response.id,

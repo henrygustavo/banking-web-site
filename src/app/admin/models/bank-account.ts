@@ -2,10 +2,10 @@ import {BaseEntity} from '../models/base-entity';
 
 export class BankAccount extends BaseEntity {
 
-     number: String;
+     number: string;
      balance: number;
      isLocked: boolean;
-     customerFullName: String;
+     customerFullName: string;
      customerId: number;
-     customerDni: number;
+     customerDni: string;
 }

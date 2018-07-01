@@ -10,10 +10,10 @@ export class BankAccountService extends BaseResourceService <BankAccount> {
         super(_jwHttp, 'bank-accounts');
     }
 
-    public generateAccountNumber(): Observable<any> {
+    public generateNumber(): Observable<any> {
 
         let entity$ = this._jwHttp
-            .get(`${this.baseUrl}/new-account`)
+            .get(`${this.baseUrl}/new-number`)
             .map((response: any) => response.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));
         return entity$;

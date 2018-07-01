@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, AfterViewInit, ViewChildren, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit,
+         ViewChildren, ElementRef, Input, ChangeDetectionStrategy } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormControlName, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { GenericValidator } from '../../../shared/validators/generic-validator';
@@ -12,19 +13,19 @@ import { Customer } from '../../models/customer';
 @Component({
   selector: 'app-customer-search',
   templateUrl: './customer-search.component.html',
-  styleUrls: ['./customer-search.component.css']
+  styleUrls: ['./customer-search.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerSearchComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onSearch: EventEmitter<number> = new EventEmitter<number>();
   @Input() customerFullName: string;
-  @Input() customerDni: string;
+  @Input() customerDni: '';
   @Input() isDisabled = false;
   @BlockUI() blockUI: NgBlockUI;
   @ViewChildren(FormControlName, { read: ElementRef })
 
   customerId: number;
-  fullName: string;
   formInputElements: ElementRef[] = [];
   displayMessage: { [key: string]: string } = {};
   validationMessages: { [key: string]: { [key: string]: string } };
@@ -41,9 +42,6 @@ export class CustomerSearchComponent implements OnInit, AfterViewInit {
     this.setUpValidationMessages();
 
     this.setUpFormControls();
-
-    this.setUpIniValues();
-
   }
 
   ngAfterViewInit(): void {
@@ -76,7 +74,8 @@ export class CustomerSearchComponent implements OnInit, AfterViewInit {
   setUpFormControls(): void {
 
     this.searchForm = this.formBuilder.group({
-      dni: new FormControl('', [Validators.required, CustomValidators.rangeLength([8, 8]), CustomValidators.digits])
+      dni: new FormControl({ value:  '', disabled: this.isDisabled },
+      [Validators.required, CustomValidators.rangeLength([8, 8]), CustomValidators.digits])
     });
 
   }
@@ -87,7 +86,7 @@ export class CustomerSearchComponent implements OnInit, AfterViewInit {
 
     let searchSubscription = this._customerService.getByDni(dni).subscribe(
       (response: Customer) => {
-        this.fullName = response.fullName;
+        this.customerFullName = response.fullName;
         this.customerId = response.id;
         this.onSearch.emit(this.customerId);
 
@@ -102,13 +101,5 @@ export class CustomerSearchComponent implements OnInit, AfterViewInit {
 
     this.subscription.add(searchSubscription);
 
-  }
-
-  setUpIniValues(): void {
-
-    this.fullName = this.customerFullName;
-    this.customerDni = this.customerDni;
-
-    this.searchForm.patchValue({ dni: this.customerDni });
   }
 }

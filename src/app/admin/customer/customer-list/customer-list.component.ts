@@ -42,7 +42,6 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   initializePagination (): void {
 
       this. columns = [
-        { prop: 'id' , name: 'id' },
         { prop: 'dni' , name: 'DNI' },
         { prop: 'fullName' , name: 'Full Name' },
         { prop: 'active' , name: 'Active'  },
