@@ -7,13 +7,13 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class BankAccountService extends BaseResourceService <BankAccount> {
     constructor(private _jwHttp: JwtHttp) {
-        super(_jwHttp, 'bank-accounts');
+        super(_jwHttp, 'bankAccounts');
     }
 
     public generateNumber(): Observable<any> {
 
         let entity$ = this._jwHttp
-            .get(`${this.baseUrl}/new-number`)
+            .get(`${this.baseUrl}/newNumber`)
             .map((response: any) => response.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));
         return entity$;
