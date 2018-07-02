@@ -8,78 +8,82 @@ import { Subscription } from 'rxjs/Subscription';
 import { MessageAlertHandleService } from '../../../shared/services/message-alert.service';
 
 @Component({
-  selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+    selector: 'app-customer-list',
+    templateUrl: './customer-list.component.html',
+    styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit, OnDestroy {
 
-  @BlockUI() blockUI: NgBlockUI;
-  @ViewChild('editTmplRow') editTmplRow: TemplateRef<any>;
+    @BlockUI() blockUI: NgBlockUI;
+    @ViewChild('editTmplRow') editTmplRow: TemplateRef<any>;
 
-  pagination: Pagination = new Pagination();
-  subscription: Subscription = new Subscription();
+    pagination: Pagination = new Pagination();
+    subscription: Subscription = new Subscription();
 
-  rows = new Array<any>();
-  columns: Array<any> = [];
+    rows = new Array<any>();
+    columns: Array<any> = [];
 
-  constructor( private _menuService: MenuService, private _customerService: CustomerService,
-              private _messageAlertHandleService: MessageAlertHandleService ) { }
+    constructor(private _menuService: MenuService, private _customerService: CustomerService,
+        private _messageAlertHandleService: MessageAlertHandleService) { }
 
-  ngOnInit() {
+    ngOnInit() {
 
-    this._menuService.selectMenuItem('customers');
+        this._menuService.selectMenuItem('customers');
 
-    this.initializePagination();
-    this.setPage({ offset: 0 });
-  }
+        this.setUpColumns();
+        this.initializePagination();
+        this.setUpPage({ offset: 0 });
+    }
 
-  ngOnDestroy(): void {
+    ngOnDestroy(): void {
 
-      this.subscription.unsubscribe();
-  }
+        this.subscription.unsubscribe();
+    }
 
-  initializePagination (): void {
+    initializePagination(): void {
 
-      this. columns = [
-        { prop: 'dni' , name: 'DNI' },
-        { prop: 'fullName' , name: 'Full Name' },
-        { prop: 'active' , name: 'Active'  },
-        { prop: '', name: '', cellTemplate: this.editTmplRow}];
+        this.pagination.currentPage = 1;
+        this.pagination.pageSize = 10;
+        this.pagination.totalRecords = 0;
+    }
 
-      this.pagination.currentPage = 1;
-      this.pagination.pageSize = 10;
-      this.pagination.totalRecords = 0;
-  }
+    setUpColumns(): void {
 
-  loadData(): void {
+        this.columns = [
+            { prop: 'dni', name: 'DNI' },
+            { prop: 'fullName', name: 'Full Name' },
+            { prop: 'active', name: 'Active' },
+            { prop: '', name: '', cellTemplate: this.editTmplRow }];
+    }
 
-      this.blockUI.start();
+    loadData(): void {
 
-      let userGetAllSubscription = this._customerService.getAll(this.pagination).subscribe(
-          (response: PaginationResult) => {
+        this.blockUI.start();
 
-                      this.pagination.totalRecords = response.totalRecords;
-                      this.pagination.totalPages = response.totalPages;
+        let userGetAllSubscription = this._customerService.getAll(this.pagination).subscribe(
+            (response: PaginationResult) => {
 
-                      this.rows = response.content;
+                this.pagination.totalRecords = response.totalRecords;
+                this.pagination.totalPages = response.totalPages;
 
-                      this.blockUI.stop();
-          },
-          (error: any) => {
-                      this._messageAlertHandleService.handleError(error);
+                this.rows = response.content;
 
-                      this.blockUI.stop();
-          }
-      );
+                this.blockUI.stop();
+            },
+            (error: any) => {
+                this._messageAlertHandleService.handleError(error);
 
-      this.subscription.add(userGetAllSubscription);
-  }
+                this.blockUI.stop();
+            }
+        );
 
-  setPage(pageInfo: any) {
+        this.subscription.add(userGetAllSubscription);
+    }
 
-      this.pagination.currentPage = pageInfo.offset + 1;
+    setUpPage(pageInfo: any) {
 
-      this.loadData();
-  }
+        this.pagination.currentPage = pageInfo.offset + 1;
+
+        this.loadData();
+    }
 }

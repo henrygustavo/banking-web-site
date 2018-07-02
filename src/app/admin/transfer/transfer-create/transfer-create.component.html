@@ -10,18 +10,18 @@
       <div class="row">
           <div class="col-md-6 well col-lg-offset-3">
               <div class="form-group">
-                  <div [ngClass]="{'has-error': displayMessage.sourceAccountNumber }">
-                      <input class="form-control" placeholder="Source Account Number" formControlName="sourceAccountNumber" readonly maxlength="18"  />
-                      <span class="help-block" *ngIf="displayMessage.sourceAccountNumber">
-                          {{displayMessage.sourceAccountNumber}}
+                  <div [ngClass]="{'has-error': displayMessage.fromAccountNumber }">
+                      <input class="form-control" placeholder="Source Account Number" formControlName="fromAccountNumber" readonly maxlength="18"  />
+                      <span class="help-block" *ngIf="displayMessage.fromAccountNumber">
+                          {{displayMessage.fromAccountNumber}}
                       </span>
                   </div>
               </div>
               <div class="form-group">
-                  <div [ngClass]="{'has-error': displayMessage.destinyAccountNumber }">
-                      <input class="form-control" placeholder="Destiny Account Number" formControlName="destinyAccountNumber" maxlength="18" />
-                      <span class="help-block" *ngIf="displayMessage.destinyAccountNumber">
-                          {{displayMessage.destinyAccountNumber}}
+                  <div [ngClass]="{'has-error': displayMessage.toAccountNumber }">
+                      <input class="form-control" placeholder="Destiny Account Number" formControlName="toAccountNumber" maxlength="18" />
+                      <span class="help-block" *ngIf="displayMessage.toAccountNumber">
+                          {{displayMessage.toAccountNumber}}
                       </span>
                   </div>
               </div>

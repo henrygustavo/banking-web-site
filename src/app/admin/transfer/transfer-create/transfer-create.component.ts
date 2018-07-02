@@ -12,6 +12,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 import { CustomValidators } from 'ng2-validation';
+import { TransferService } from '../../services/transfer.service';
+import { Transfer } from '../../models/transfer';
 
 @Component({
   selector: 'app-transfer-create',
@@ -33,14 +35,14 @@ export class TransferCreateComponent implements OnInit, AfterViewInit, OnDestroy
     private _messageAlertHandleService: MessageAlertHandleService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private _transferService: TransferService) { }
 
   ngOnInit() {
     this._menuService.selectMenuItem('transfers');
     this.setUpValidationMessages();
     this.setUpFormControls();
-
-    this.mainForm.controls['sourceAccountNumber'].setValue('001104860195023275');
+    this.getSourceAccountNumber();
   }
 
   ngAfterViewInit(): void {
@@ -64,12 +66,12 @@ export class TransferCreateComponent implements OnInit, AfterViewInit, OnDestroy
 
     this.validationMessages = {
 
-      sourceAccountNumber: {
+      fromAccountNumber: {
         required: 'Source Account Number is required.',
         number: 'Please enter a valid account number.',
         rangeLength: 'Source Account Number must have 18 numbers.'
       },
-      destinyAccountNumber: {
+      toAccountNumber: {
         required: 'Destiny Account Number is required.',
         number: 'Please enter a valid account number.',
         rangeLength: 'Destiny Account Number must have 18 numbers.'
@@ -87,35 +89,62 @@ export class TransferCreateComponent implements OnInit, AfterViewInit, OnDestroy
   setUpFormControls(): void {
 
     this.mainForm = this.formBuilder.group({
-      sourceAccountNumber: new FormControl('', [Validators.required, CustomValidators.number,
-                                  CustomValidators.rangeLength([18, 18])]),
-      destinyAccountNumber: new FormControl('', [Validators.required, CustomValidators.number,
+      fromAccountNumber: new FormControl('', [Validators.required, CustomValidators.number,
+      CustomValidators.rangeLength([18, 18])]),
+      toAccountNumber: new FormControl('', [Validators.required, CustomValidators.number,
       CustomValidators.rangeLength([18, 18])]),
       amount: new FormControl('', [Validators.required, CustomValidators.number,
-                                  CustomValidators.gt(0)])
+      CustomValidators.gt(0)])
     });
+  }
+
+  getSourceAccountNumber(): void {
+
+    this._route.params.subscribe(
+
+      (params): void => {
+        const id: number = Number(params['id']);
+        this.setUpSourceAccountNumber(id);
+      });
+
+  }
+  setUpSourceAccountNumber(id: number): void {
+
+    this.blockUI.start();
+    let fromAccountNumberSubscription = this._transferService.getAccountNumber(id).subscribe(
+      (response: any) => {
+
+        this.mainForm.patchValue( { fromAccountNumber: response.accountNumber });
+        this.blockUI.stop();
+      },
+      error => {
+        this._messageAlertHandleService.handleError(error);
+        this.blockUI.stop();
+      }
+    );
+
+    this.subscription.add(fromAccountNumberSubscription);
   }
 
   transfer(): void {
 
     if (this.mainForm.dirty && this.mainForm.valid) {
+      let model =  this.mainForm.value;
+      this.blockUI.start();
+      let transferSubscription = this._transferService.transfer(model).subscribe(
+        () => {
+          this._messageAlertHandleService.handleSuccess('Saved successfully');
+          this.mainForm.reset();
+          this.blockUI.stop();
+          this._router.navigate(['/transfers']);
+        },
+        error => {
+          this._messageAlertHandleService.handleError(error);
+          this.blockUI.stop();
+        }
+      );
 
-        this.blockUI.start();
- /*        let saveSubscription =  this._customerService.save(model, Number(model.id)).subscribe(
-            () => { */
-                // Reset the form to clear the flags
-                    this._messageAlertHandleService.handleSuccess('Saved successfully');
-                    this.mainForm.reset();
-                    this.blockUI.stop();
-                    this._router.navigate(['/transfers']);
-         /*    },
-            error => {
-                this._messageAlertHandleService.handleError(error);
-                this.blockUI.stop();
-            }
-         );
-
-        this.subscription.add(saveSubscription);*/
+      this.subscription.add(transferSubscription);
     }
   }
 }

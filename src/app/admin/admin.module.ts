@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TransferListComponent } from './transfer/transfer-list/transfer-list.component';
 import { TransferCreateComponent } from './transfer/transfer-create/transfer-create.component';
 import { CustomerSearchComponent } from './customer/customer-search/customer-search.component';
+import { TransferService } from './services/transfer.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { CustomerSearchComponent } from './customer/customer-search/customer-sea
   declarations: [DashBoardComponent, CustomerListComponent,
                 CustomerEditComponent, BankAccountEditComponent,
                 BankAccountListComponent, CustomerSearchComponent, TransferListComponent, TransferCreateComponent],
-  providers: [AdminGuard, BankAccountService, CustomerService]
+  providers: [AdminGuard, BankAccountService, CustomerService, TransferService]
 
 })
 export class AdminModule { }

@@ -15,7 +15,7 @@
 <!-- /#page-wrapper -->
 
 <ng-template #editTmplRow let-row="row" ngx-datatable-cell-template>
-  <a [routerLink]="['/','transfers','create', 0]">
+  <a [routerLink]="['/','transfers','create', row.id]">
     <i class="btn fa fa-credit-card"></i>
   </a>
 </ng-template>
