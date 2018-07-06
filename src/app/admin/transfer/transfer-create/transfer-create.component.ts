@@ -74,7 +74,8 @@ export class TransferCreateComponent implements OnInit, AfterViewInit, OnDestroy
       toAccountNumber: {
         required: 'Destiny Account Number is required.',
         number: 'Please enter a valid account number.',
-        rangeLength: 'Destiny Account Number must have 18 numbers.'
+        rangeLength: 'Destiny Account Number must have 18 numbers.',
+        notEqualTo: 'Destiny Account should be different than origin Account.'
       },
       amount: {
         required: 'Amount is required.',
@@ -88,11 +89,15 @@ export class TransferCreateComponent implements OnInit, AfterViewInit, OnDestroy
 
   setUpFormControls(): void {
 
+    let fromAccountNumber = new FormControl('', [Validators.required, CustomValidators.number,
+      CustomValidators.rangeLength([18, 18])]);
+
+      let toAccountNumber = new FormControl('', [Validators.required, CustomValidators.number,
+        CustomValidators.rangeLength([18, 18]),  CustomValidators.notEqualTo(fromAccountNumber)]);
+
     this.mainForm = this.formBuilder.group({
-      fromAccountNumber: new FormControl('', [Validators.required, CustomValidators.number,
-      CustomValidators.rangeLength([18, 18])]),
-      toAccountNumber: new FormControl('', [Validators.required, CustomValidators.number,
-      CustomValidators.rangeLength([18, 18])]),
+      fromAccountNumber: fromAccountNumber,
+      toAccountNumber: toAccountNumber,
       amount: new FormControl('', [Validators.required, CustomValidators.number,
       CustomValidators.gt(0)])
     });
