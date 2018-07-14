@@ -40,8 +40,22 @@ export class CustomerListComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    onSort(event: any) {
+
+        const sort = event.sorts[0];
+
+        this.pagination.sortBy =  sort.prop === 'fullName' ? 'lastName' : sort.prop;
+        this.pagination.sortDirection = sort.dir;
+        this.pagination.currentPage = 1;
+        this.pagination.pageSize = 10;
+
+        this.loadData();
+    }
+
     initializePagination(): void {
 
+        this.pagination.sortBy = 'lastName';
+        this.pagination.sortDirection = 'desc';
         this.pagination.currentPage = 1;
         this.pagination.pageSize = 10;
         this.pagination.totalRecords = 0;

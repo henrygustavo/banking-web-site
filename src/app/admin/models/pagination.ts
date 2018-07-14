@@ -9,4 +9,6 @@ export class Pagination {
     totalPages: number;
     startRow: number;
     endRow: number;
+    sortBy: string;
+    sortDirection: string;
 }

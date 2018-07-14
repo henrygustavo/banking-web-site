@@ -79,11 +79,12 @@ export abstract class BaseResourceService<T> {
             url = `${url}&pageSize=${pagination.pageSize}`;
         }
 
-        if (pagination.searchCriteria !== undefined) {
+        if (pagination.sortBy !== undefined) {
+            url = `${url}&sortBy=${pagination.sortBy}`;
+        }
 
-            for (let criteria of pagination.searchCriteria) {
-                url = `${url}&${criteria.key}=${criteria.value}`;
-            }
+        if (pagination.sortDirection !== undefined) {
+            url = `${url}&sortDirection=${pagination.sortDirection}`;
         }
 
         return url;
