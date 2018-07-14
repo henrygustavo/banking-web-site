@@ -6,4 +6,4 @@ import { ModuleWithProviders } from '@angular/core';
     { path: '', loadChildren: './admin/admin.module#AdminModule' }
 ];
 
-export const appRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
+export const appRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: false});
