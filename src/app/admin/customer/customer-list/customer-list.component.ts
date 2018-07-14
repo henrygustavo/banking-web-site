@@ -55,7 +55,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     initializePagination(): void {
 
         this.pagination.sortBy = 'lastName';
-        this.pagination.sortDirection = 'desc';
+        this.pagination.sortDirection = 'asc';
         this.pagination.currentPage = 1;
         this.pagination.pageSize = 10;
         this.pagination.totalRecords = 0;
